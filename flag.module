@@ -498,7 +498,7 @@ function flag_get_user_flag_counts($flag, $user) {
  *   The entity ID (usually the node ID).
  *
  * @return
- *   The flag count with the entity type and id as array keys.
+ *   The flag count with the flag names as array keys.
  *
  * @deprecated In Drupal 8
  * @todo Move flag_get_counts() to FlagCountService.
