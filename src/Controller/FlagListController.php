@@ -91,9 +91,9 @@ class FlagListController extends ConfigEntityListBuilder {
     }
     else {
       $output .= '<p>';
-      $output .= t('Lists of flagged content can be displayed using views. You can configure these in the <a href="@views-url">Views administration section</a>.', ['@views-url' => Url::fromRoute('views_ui.list')->toString()]);
+      $output .= t('Lists of flagged content can be displayed using views. You can configure these in the <a href="@views-url">Views administration section</a>.', ['@views-url' => Url::fromRoute('entity.view.collection')->toString()]);
       if (\Drupal::service('flag')->getFlagById('bookmarks')) {
-        $output .= ' ' . t('Flag module automatically provides a few <a href="@views-url">default views for the <em>bookmarks</em> flag</a>. You can use these as templates by cloning these views and then customizing as desired.', ['@views-url' => Url::fromRoute('views_ui.list', ['query' => ['tag' => 'flag']])->toString()]);
+        $output .= ' ' . t('Flag module automatically provides a few <a href="@views-url">default views for the <em>bookmarks</em> flag</a>. You can use these as templates by cloning these views and then customizing as desired.', ['@views-url' => Url::fromRoute('entity.view.collection', ['query' => ['tag' => 'flag']])->toString()]);
       }
       $output .= ' ' . t('The <a href="@flag-handbook-url">Flag module handbook</a> contains extensive <a href="@customize-url">documentation on creating customized views</a> using flags.', ['@flag-handbook-url' => 'http://drupal.org/handbook/modules/flag', '@customize-url' => 'http://drupal.org/node/296954']);
       $output .= '</p>';
