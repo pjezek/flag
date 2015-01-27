@@ -76,8 +76,7 @@ abstract class ActionLinkTypeBase extends PluginBase implements ActionLinkTypePl
       return $route_params['destination'];
     }
 
-    $current_path = ltrim($current_url->toString(), '/');
-    return $current_path;
+    return $current_url->getInternalPath();
   }
 
   /**
