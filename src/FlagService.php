@@ -201,7 +201,7 @@ class FlagService {
    *   The flag entity.
    */
   public function getFlagById($flag_id) {
-    return  $this->entityManager->getStorage('flag')->load($flag_id);
+    return $this->entityManager->getStorage('flag')->load($flag_id);
   }
 
   /**
