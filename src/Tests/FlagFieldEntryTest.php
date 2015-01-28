@@ -6,6 +6,7 @@
 
 namespace Drupal\flag\Tests;
 
+use Drupal\field_ui\Tests\FieldUiTestTrait;
 use Drupal\simpletest\WebTestBase;
 use Drupal\user\Entity\Role;
 
@@ -15,6 +16,8 @@ use Drupal\user\Entity\Role;
  * @group flag
  */
 class FlagFieldEntryTest extends WebTestBase {
+
+  use FieldUiTestTrait;
 
   /**
    * The label of the flag to create for the test.
@@ -124,20 +127,7 @@ class FlagFieldEntryTest extends WebTestBase {
    * Add fields to flag.
    */
   public function doAddFields() {
-    $edit = [
-      'fields[_add_new_field][label]' => $this->flagFieldLabel,
-      'fields[_add_new_field][field_name]' => $this->flagFieldId,
-      'fields[_add_new_field][type]' => 'text',
-    ];
-    $this->drupalPostForm('admin/structure/flags/manage/' . $this->id . '/fields', $edit, t('Save'));
-
-    $edit = [
-      'field_storage[cardinality]' => '-1',
-      'field_storage[cardinality_number]' => '1',
-    ];
-    $this->drupalPostForm(NULL, $edit, t('Save field settings'));
-
-    $this->assertText(t('Updated field') . ' ' . $this->flagFieldLabel . ' ' . t('field settings.'));
+    $this->fieldUIAddNewField('admin/structure/flags/manage/' . $this->id, $this->flagFieldId, $this->flagFieldLabel, 'text');
   }
 
   /**
