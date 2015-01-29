@@ -250,12 +250,10 @@ interface FlagInterface extends ConfigEntityInterface, EntityWithPluginCollectio
   public function getPluginCollections();
 
   /**
-   * User access permission for flagging actions.
-   *
    * Checks whether a user has permission to flag/unflag or not.
    *
    * @param string $action
-   *   An indicator flag.
+   *   The action for which to check permissions, either 'flag' or 'unflag'.
    * @param AccountInterface $account
    *   (optional) An AccountInterface object.
    *
