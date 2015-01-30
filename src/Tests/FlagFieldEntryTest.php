@@ -78,7 +78,16 @@ class FlagFieldEntryTest extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = array('views', 'flag', 'node', 'field_ui', 'text');
+  public static $modules = array('views', 'flag', 'node', 'field_ui', 'text', 'block');
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp() {
+    parent::setUp();
+    // The breadcrumb block is needed for FieldUiTestTrait's tests.
+    $this->drupalPlaceBlock('system_breadcrumb_block');
+  }
 
   /**
    * Create a new flag with the Field Entry type, and add fields.
