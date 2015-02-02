@@ -56,7 +56,7 @@ Configuration
 
 Configuration of Flag module involves creating one or more flags.
 
-1. Go to Admin > Structure > Flags, and click "Add New Flag".
+1. Go to Admin > Structure > Flags, and click "Add flag".
 2. Select the target entity type, and click "Continue".
 3. Enter the flag link text, link type, and any other options.
 4. Click "Save Flag".

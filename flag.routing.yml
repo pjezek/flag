@@ -2,7 +2,7 @@ flag.add_page:
   path: '/admin/structure/flags/add'
   defaults:
     _form: '\Drupal\flag\Form\FlagAddPageForm'
-    _title: 'Add New Flag'
+    _title: 'Add flag'
   requirements:
     _permission: 'administer flags'
 
@@ -18,7 +18,7 @@ entity.flag.add_form:
   path: '/admin/structure/flags/add/{entity_type}'
   defaults:
     _entity_form: flag.add
-    _title: 'Add New Flag'
+    _title: 'Add flag'
   requirements:
     _permission: 'administer flags'
 
