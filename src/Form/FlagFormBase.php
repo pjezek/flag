@@ -63,7 +63,8 @@ abstract class FlagFormBase extends EntityForm {
     ];
 
     $form['messages'] = [
-      '#type' => 'fieldset',
+      '#type' => 'details',
+      '#open' => TRUE,
       '#title' => t('Messages'),
     ];
 
@@ -114,7 +115,8 @@ abstract class FlagFormBase extends EntityForm {
     ];
 
     $form['access'] = [
-      '#type' => 'fieldset',
+      '#type' => 'details',
+      '#open' => TRUE,
       '#title' => t('Flag access'),
       '#tree' => FALSE,
       '#weight' => 10,
@@ -151,7 +153,8 @@ abstract class FlagFormBase extends EntityForm {
     ];
 
     $form['display'] = [
-      '#type' => 'fieldset',
+      '#type' => 'details',
+      '#open' => TRUE,
       '#title' => t('Display options'),
       '#description' => t('Flags are usually controlled through links that allow users to toggle their behavior. You can choose how users interact with flags by changing options here. It is legitimate to have none of the following checkboxes ticked, if, for some reason, you wish <a href="@placement-url">to place the the links on the page yourself</a>.', array('@placement-url' => 'http://drupal.org/node/295383')),
       '#tree' => FALSE,

@@ -51,7 +51,8 @@ class FieldEntry extends ActionLinkTypeBase {
     $form = parent::buildConfigurationForm($form, $form_state);
 
     $form['display']['settings']['link_options_field'] = [
-      '#type' => 'fieldset',
+      '#type' => 'details',
+      '#open' => TRUE,
       '#title' => t('Options for the "Field entry" link type'),
       // Any "link type" provider module must put its settings fields inside
       // a fieldset whose HTML ID is link-options-LINKTYPE, where LINKTYPE is
