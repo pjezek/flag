@@ -54,7 +54,7 @@ abstract class FlagFormBase extends EntityForm {
       '#required' => TRUE,
     ];
 
-    $form['is_global'] = [
+    $form['global'] = [
       '#type' => 'checkbox',
       '#title' => t('Global flag'),
       '#default_value' => $flag->isGlobal(),

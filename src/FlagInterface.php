@@ -109,12 +109,12 @@ interface FlagInterface extends ConfigEntityInterface, EntityWithPluginCollectio
   /**
    * Sets the flag as global or not.
    *
-   * @param bool $is_global
+   * @param bool $global
    *   TRUE to mark the flag as global, FALSE for the default behavior.
    *
    * @see \Drupal\flag\Entity\Flag::isGlobal()
    */
-  public function setGlobal($is_global);
+  public function setGlobal($global);
 
   /**
    * The flag short text.

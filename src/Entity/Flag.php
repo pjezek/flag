@@ -80,7 +80,7 @@ class Flag extends ConfigEntityBase implements FlagInterface {
    *
    * @var bool
    */
-  protected $is_global = FALSE;
+  protected $global = FALSE;
 
   /**
    * Whether this flag is enabled.
@@ -370,18 +370,18 @@ class Flag extends ConfigEntityBase implements FlagInterface {
    * {@inheritdoc}
    */
   public function isGlobal() {
-    return $this->is_global;
+    return $this->global;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function setGlobal($is_global = TRUE) {
-    if ($is_global) {
-      $this->is_global = TRUE;
+  public function setGlobal($global = TRUE) {
+    if ($global) {
+      $this->global = TRUE;
     }
     else {
-      $this->is_global = FALSE;
+      $this->global = FALSE;
     }
   }
 
