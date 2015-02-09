@@ -34,7 +34,7 @@ class FlagTypePluginManager extends DefaultPluginManager {
   }
 
   /**
-   * Gets all flag types.
+   * Gets all flag subtypes.
    *
    * @return array
    *   Returns an array of all flag type titles keyed by plugin ID.

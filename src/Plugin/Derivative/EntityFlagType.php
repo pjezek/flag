@@ -9,7 +9,7 @@ namespace Drupal\flag\Plugin\Derivative;
 use Drupal\Component\Plugin\Derivative\DeriverBase;
 
 /**
- * Derivative class for entity flag types plugin.
+ * Derivative class for entity flag subtypes plugin.
  */
 class EntityFlagType extends DeriverBase {
   /*

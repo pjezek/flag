@@ -87,7 +87,7 @@ class FlagService {
    *
    * @param string $entity_type
    *   (optional) The entity type to get the definition for, or NULL to return
-   *   all flag types.
+   *   all flag subtypes.
    *
    * @return array
    *   The flag type definition array.

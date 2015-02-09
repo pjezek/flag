@@ -286,7 +286,7 @@ abstract class FlagFormBase extends EntityForm {
     // This needs to be done after the flag cache has been cleared, so that
     // the new permissions are picked up by hook_permission().
     // This may need to move to the flag class when we implement extra
-    // permissions for different flag types: http://drupal.org/node/879988
+    // permissions for different flag subtypes: http://drupal.org/node/879988
 
     // If the flag ID has changed, clean up all the obsolete permissions.
     if ($flag->id != $form['#flag_name']) {
