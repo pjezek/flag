@@ -19,8 +19,8 @@ class FlaggingAccessController extends ControllerBase {
   /**
    * Checks flagging permission.
    *
-   * @param Request $request
-   *   The request object.
+   * @param int $flag_id
+   *   The flag identifier.
    *
    * @return string
    *   Returns indication value for flagging access permission.
@@ -33,8 +33,8 @@ class FlaggingAccessController extends ControllerBase {
   /**
    * Checks unflagging permission.
    *
-   * @param Request $request
-   *   The request object.
+   * @param int $flag_id
+   *   The flag identifier.
    *
    * @return string
    *   Returns indication value for unflagging access permission.
