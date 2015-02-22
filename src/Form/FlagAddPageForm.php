@@ -62,7 +62,7 @@ class FlagAddPageForm extends FormBase {
       'entity_type' => $form_state->getValue('flag_entity_type')
     ]);
 
-    $tempstore = \Drupal::service('user.tempstore')->get('flag');
+    $tempstore = \Drupal::service('user.private_tempstore')->get('flag');
     $tempstore->set('FlagAddPage', $form_state->getValues());
   }
 

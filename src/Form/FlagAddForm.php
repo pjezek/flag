@@ -25,7 +25,7 @@ class FlagAddForm extends FlagFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state, $entity_type = NULL) {
     // @todo Check all non-form_* params with check_plain().
-    $tempstore = \Drupal::service('user.tempstore')->get('flag');
+    $tempstore = \Drupal::service('user.private_tempstore')->get('flag');
     $step1_form = $tempstore->get('FlagAddPage');
 
     $flag = $this->entity;
