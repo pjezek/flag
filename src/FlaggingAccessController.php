@@ -22,7 +22,7 @@ class FlaggingAccessController extends ControllerBase {
    * @param int $flag_id
    *   The flag identifier.
    *
-   * @return string
+   * @return \Drupal\Core\Access\AccessResult
    *   Returns indication value for flagging access permission.
    */
   public function checkFlag($flag_id) {
@@ -36,7 +36,7 @@ class FlaggingAccessController extends ControllerBase {
    * @param int $flag_id
    *   The flag identifier.
    *
-   * @return string
+   * @return \Drupal\Core\Access\AccessResult
    *   Returns indication value for unflagging access permission.
    */
   public function checkUnflag($flag_id) {
