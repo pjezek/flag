@@ -149,6 +149,10 @@ class FlagFieldEntryTest extends WebTestBase {
    * Add fields to flag.
    */
   public function doAddFields() {
+    // Check the Field UI tabs appear on the flag edit page.
+    $this->drupalGet('admin/structure/flags/manage/' . $this->id);
+    $this->assertText(t("Manage fields"), "The Field UI tabs appear on the flag edit form page.");
+
     $this->fieldUIAddNewField('admin/structure/flags/manage/' . $this->id, $this->flagFieldId, $this->flagFieldLabel, 'text');
   }
 
