@@ -9,7 +9,7 @@ namespace Drupal\flag\Entity;
 use Drupal\Core\Plugin\DefaultSingleLazyPluginCollection;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Config\Entity\ConfigEntityBase;
+use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\flag\Event\FlagDeleteEvent;
@@ -44,7 +44,7 @@ use Drupal\flag\FlagInterface;
  *   }
  * )
  */
-class Flag extends ConfigEntityBase implements FlagInterface {
+class Flag extends ConfigEntityBundleBase implements FlagInterface {
   // @todo: Define flag reset method.
 
   /**
