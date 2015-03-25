@@ -73,7 +73,7 @@ function hook_flag_options_alter(array &$options, FlagInterface $flag) {
  *   The flagging entity.
  *
  * @return array|null
- *   Optional array: textual error with the error-name as the key.
+ *   (optional) array: textual error with the error-name as the key.
  *   If the error name is 'access-denied' and javascript is disabled,
  *   drupal_access_denied will be called and a 403 will be returned.
  *   If validation is successful, do not return a value.

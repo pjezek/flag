@@ -153,13 +153,13 @@ class FlagService {
    * Get all flaggings for the given entity, flag, and optionally, user.
    *
    * @param EntityInterface $entity
-   *   Optional. The flaggable entity. If NULL, flaggins for any entity will be
+   *   (optional) The flaggable entity. If NULL, flaggins for any entity will be
    *   returned.
    * @param FlagInterface $flag
-   *   Optional. The flag entity. If NULL, flaggings for any flag will be
+   *   (optional) The flag entity. If NULL, flaggings for any flag will be
    *   returned.
    * @param AccountInterface $account
-   *   Optional. The account of the flagging user. If NULL, flaggings for any
+   *   (optional) The account of the flagging user. If NULL, flaggings for any
    *   user will be returned.
    *
    * @return array
@@ -225,7 +225,7 @@ class FlagService {
    * @param EntityInterface $entity
    *   The entity object.
    * @param FlagInterface $flag
-   *   Optional. The flag entity to which to restrict results.
+   *   (optional) The flag entity to which to restrict results.
    *
    * @return array
    *   An array of users who have flagged the entity.
@@ -257,7 +257,7 @@ class FlagService {
    * @param EntityInterface $entity
    *   The entity to flag.
    * @param AccountInterface $account
-   *   Optional. The account of the user flagging the entity. If not given,
+   *   (optional) The account of the user flagging the entity. If not given,
    *   the current user is used.
    *
    * @return FlaggingInterface|null
@@ -299,7 +299,7 @@ class FlagService {
    * @param int $entity_id
    *   The ID of the entity to flag.
    * @param AccountInterface $account
-   *   Optional. The account of user flagging the entity. If not given, the
+   *   (optional) The account of user flagging the entity. If not given, the
    *   current user is used.
    *
    * @return FlaggingInterface|null
@@ -326,7 +326,7 @@ class FlagService {
    * @param int $entity_id
    *   The ID of the flagged entity to unflag.
    * @param AccountInterface $account
-   *   Optional. The account of the user that created the flagging.
+   *   (optional) The account of the user that created the flagging.
    *
    * @return array
    *   An array of flagging IDs to delete.
@@ -354,7 +354,7 @@ class FlagService {
    * @param EntityInterface $entity
    *   The entity to unflag.
    * @param AccountInterface $account
-   *   Optional. The account of the user that created the flagging.
+   *   (optional) The account of the user that created the flagging.
    *
    * @return array
    *   An array of flagging IDs to delete.

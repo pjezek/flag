@@ -40,7 +40,7 @@ interface FlagInterface extends ConfigEntityInterface, EntityWithPluginCollectio
    * @param EntityInterface $entity
    *   The flaggable entity.
    * @param AccountInterface $account
-   *   Optional. The account of the user that flagged the entity.
+   *   (optional) The account of the user that flagged the entity.
    *
    * @return bool
    *   True if the given entity is flagged, FALSE otherwise.
