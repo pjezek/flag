@@ -360,10 +360,6 @@ class Flag extends ConfigEntityBundleBase implements FlagInterface {
       $account = $account ?: \Drupal::currentUser();
       return $account->hasPermission($action . ' ' . $this->id);
     }
-    else {
-      // @todo: Is this the correct response?
-      return FALSE;
-    }
   }
 
   /**
