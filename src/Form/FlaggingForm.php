@@ -29,7 +29,13 @@ class FlaggingForm extends ContentEntityForm {
    */
   public function actions(array $form, FormStateInterface $form_state) {
     $actions = parent::actions($form, $form_state);
-    $actions['submit']['#value'] = $this->t('Update Flagging');
+
+    if ($this->entity->isNew()) {
+      $actions['submit']['#value'] = $this->t('Create Flagging');
+    }
+    else {
+      $actions['submit']['#value'] = $this->t('Update Flagging');
+    }
 
     // Customize the delete link.
     if (isset($actions['delete'])) {

@@ -186,7 +186,7 @@ class FlagFieldEntryTest extends WebTestBase {
     $edit = [
       'field_' . $this->flagFieldId . '[0][value]' => $this->flagFieldValue,
     ];
-    $this->drupalPostForm(NULL, $edit, t('Update Flagging'));
+    $this->drupalPostForm(NULL, $edit, t('Create Flagging'));
 
     // Check that the node is flagged.
     $this->assertLink(t('Unflag this item'));
