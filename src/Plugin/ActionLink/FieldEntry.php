@@ -108,10 +108,6 @@ class FieldEntry extends ActionLinkTypeBase {
         $form_state->setErrorByName('unflag_confirmation', 'An unflag confirmation message is required when using the field entry link type.');
       }
     }
-
-    if (!preg_match('/^[a-z_][a-z0-9_]*$/', $form_state->getValue('id'))) {
-      $form_state->setErrorByName('label', 'The flag name may only contain lowercase letters, underscores, and numbers.');
-    }
   }
 
   /**
