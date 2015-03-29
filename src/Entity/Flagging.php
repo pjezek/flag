@@ -19,11 +19,11 @@ use Drupal\flag\FlaggingInterface;
  *  label = @Translation("Flagging"),
  *  bundle_label = @Translation("Flagging"),
  *  handlers = {
- *     "form" = {
- *       "add" = "Drupal\flag\Form\FlaggingForm",
- *       "edit" = "Drupal\flag\Form\FlaggingForm",
- *       "delete" = "Drupal\flag\Form\FlaggingConfirmForm"
- *     }
+ *    "form" = {
+ *      "add" = "Drupal\flag\Form\FlaggingForm",
+ *      "edit" = "Drupal\flag\Form\FlaggingForm",
+ *      "delete" = "Drupal\flag\Form\FlaggingConfirmForm"
+ *    }
  *  },
  *  base_table = "flagging",
  *  data_table = "flagging_data",
