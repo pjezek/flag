@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains \Drupal\flag\Plugin\Derivative\EntityFlagType.
+ * Contains \Drupal\flag\Plugin\Derivative\EntityFlagTypeDeriver.
  */
 
 namespace Drupal\flag\Plugin\Derivative;
@@ -11,7 +11,7 @@ use Drupal\Component\Plugin\Derivative\DeriverBase;
 /**
  * Derivative class for entity flag subtypes plugin.
  */
-class EntityFlagType extends DeriverBase {
+class EntityFlagTypeDeriver extends DeriverBase {
   /*
   public function __construct($base_plugin_id,
   EntityStorageControllerInterface $storageController) {

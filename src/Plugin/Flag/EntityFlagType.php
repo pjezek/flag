@@ -17,7 +17,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @FlagType(
  *   id = "flagtype_entity",
  *   title = @Translation("Flag Type Entity"),
- *   deriver = "Drupal\flag\Plugin\Derivative\EntityFlagType"
+ *   deriver = "Drupal\flag\Plugin\Derivative\EntityFlagTypeDeriver"
  * )
  */
 class EntityFlagType extends FlagTypeBase {
