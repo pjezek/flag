@@ -24,7 +24,7 @@ use Drupal\flag\FlagInterface;
  *   label = @Translation("Flag"),
  *   admin_permission = "administer flags",
  *   handlers = {
- *     "list_builder" = "Drupal\flag\Controller\FlagListController",
+ *     "list_builder" = "Drupal\flag\Controller\FlagListBuilder",
  *     "form" = {
  *       "add" = "Drupal\flag\Form\FlagAddForm",
  *       "edit" = "Drupal\flag\Form\FlagEditForm",

@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains the \Drupal\flag\Controller\FlagListController class.
+ * Contains \Drupal\flag\Controller\FlagListBuilder.
  */
 
 namespace Drupal\flag\Controller;
@@ -15,7 +15,7 @@ use Drupal\Core\Url;
 /**
  * Provides a entity list page for Flags.
  */
-class FlagListController extends ConfigEntityListBuilder {
+class FlagListBuilder extends ConfigEntityListBuilder {
 
   /**
    * Overrides Drupal\Core\Entity\EntityListController::buildHeader().
