@@ -55,7 +55,7 @@ abstract class ActionLinkTypeBase extends PluginBase implements ActionLinkTypePl
    */
   public function buildLink($action, FlagInterface $flag, EntityInterface $entity) {
     $parameters = [
-      'flag_id' => $flag->id(),
+      'flag' => $flag->id(),
       'entity_id' => $entity->id(),
     ];
 

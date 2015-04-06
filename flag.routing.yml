@@ -39,7 +39,7 @@ entity.flag.delete_form:
     _entity_access: 'flag.update'
 
 flag_link_flag.html:
-  path: '/flag/flag/{flag_id}/{entity_id}'
+  path: '/flag/flag/{flag}/{entity_id}'
   defaults:
     _controller: '\Drupal\flag\Controller\ReloadLinkController::flag'
   requirements:
@@ -47,7 +47,7 @@ flag_link_flag.html:
     _format: 'html'
 
 flag.link_flag.json:
-  path: '/flag/flag/{flag_id}/{entity_id}'
+  path: '/flag/flag/{flag}/{entity_id}'
   defaults:
     _controller: '\Drupal\flag\Controller\AJAXLinkController::flag'
   requirements:
@@ -55,7 +55,7 @@ flag.link_flag.json:
     _format: 'json'
 
 flag_link_unflag.html:
-  path: '/flag/unflag/{flag_id}/{entity_id}'
+  path: '/flag/unflag/{flag}/{entity_id}'
   defaults:
     _controller: '\Drupal\flag\Controller\ReloadLinkController::unflag'
   requirements:
@@ -63,7 +63,7 @@ flag_link_unflag.html:
     _format: 'html'
 
 flag.link_unflag.json:
-  path: '/flag/unflag/{flag_id}/{entity_id}'
+  path: '/flag/unflag/{flag}/{entity_id}'
   defaults:
     _controller: '\Drupal\flag\Controller\AJAXLinkController::unflag'
   requirements:
@@ -71,7 +71,7 @@ flag.link_unflag.json:
     _format: 'json'
 
 flag.confirm_flag:
-  path: '/flag/confirm/flag/{flag_id}/{entity_id}'
+  path: '/flag/confirm/flag/{flag}/{entity_id}'
   defaults:
     _form: '\Drupal\flag\Form\FlaggingConfirmForm'
     _title: 'Flag Content'
@@ -79,7 +79,7 @@ flag.confirm_flag:
     _custom_access: '\Drupal\flag\FlaggingAccessController::checkflag'
 
 flag.confirm_unflag:
-  path: '/flag/confirm/unflag/{flag_id}/{entity_id}'
+  path: '/flag/confirm/unflag/{flag}/{entity_id}'
   defaults:
     _form: '\Drupal\flag\Form\FlaggingConfirmForm'
     _title: 'Flag Content'
@@ -87,7 +87,7 @@ flag.confirm_unflag:
     _custom_access: '\Drupal\flag\FlaggingAccessController::checkUnflag'
 
 flag.field_entry:
-  path: '/flag/details/flag/{flag_id}/{entity_id}'
+  path: '/flag/details/flag/{flag}/{entity_id}'
   defaults:
     _controller: '\Drupal\flag\Controller\FieldEntryFormController::flag'
     _title_callback: '\Drupal\flag\Controller\FieldEntryFormController::flagTitle'
@@ -95,7 +95,7 @@ flag.field_entry:
     _custom_access: '\Drupal\flag\FlaggingAccessController::checkflag'
 
 flag.field_entry.edit:
-  path: '/flag/details/edit/{flag_id}/{entity_id}'
+  path: '/flag/details/edit/{flag}/{entity_id}'
   defaults:
     _controller: '\Drupal\flag\Controller\FieldEntryFormController::edit'
     _title_callback: '\Drupal\flag\Controller\FieldEntryFormController::editTitle'

@@ -7,6 +7,7 @@
 namespace Drupal\flag\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\flag\FlagInterface;
 use Drupal\flag\FlaggingInterface;
 use Drupal\flag\Entity\Flag;
 
@@ -18,8 +19,8 @@ class FieldEntryFormController extends ControllerBase {
   /**
    * Performs a flagging when called via a route.
    *
-   * @param int $flag_id
-   *   The flag ID.
+   * @param \Drupal\flag\FlagInterface $flag
+   *   The flag entity.
    * @param int $entity_id
    *   The flaggable ID.
    *
@@ -28,9 +29,10 @@ class FieldEntryFormController extends ControllerBase {
    *
    * @see \Drupal\flag\Plugin\ActionLink\AJAXactionLink
    */
-  public function flag($flag_id, $entity_id) {
+  public function flag(FlagInterface $flag, $entity_id) {
+    $flag_id = $flag->id();
+
     $account = $this->currentUser();
-    $flag = Flag::load($flag_id);
 
     $flagging = $this->entityManager()->getStorage('flagging')->create([
       'fid' => $flag->id(),
@@ -46,15 +48,17 @@ class FieldEntryFormController extends ControllerBase {
   /**
    * Return the flagging edit form.
    *
-   * @param string $flag_id
-   *   The flag ID.
+   * @param \Drupal\flag\FlagInterface $flag
+   *   The flag entity.
    * @param mixed $entity_id
    *   The entity ID.
    *
    * @return array
    *   The flagging edit form.
    */
-  public function edit($flag_id, $entity_id) {
+  public function edit(FlagInterface $flag, $entity_id) {
+    $flag_id = $flag->id();
+
     $flagging = $this->getFlagging($flag_id, $entity_id);
 
     return $this->getForm($flagging, 'edit');
@@ -73,7 +77,9 @@ class FieldEntryFormController extends ControllerBase {
    *
    * @see \Drupal\flag\Plugin\ActionLink\AJAXactionLink
    */
-  public function unflag($flag_id, $entity_id) {
+  public function unflag(FlagInterface $flag, $entity_id) {
+    $flag_id = $flag->id();
+
     $flagging = $this->getFlagging($flag_id, $entity_id);
 
     return $this->getForm($flagging, 'delete');
@@ -82,16 +88,15 @@ class FieldEntryFormController extends ControllerBase {
   /**
    * Title callback when creating a new flagging.
    *
-   * @param int $flag_id
-   *   The flag ID.
+   * @param \Drupal\flag\FlagInterface $flag
+   *   The flag entity.
    * @param int $entity_id
    *   The entity ID to unflag.
    *
    * @return string
    *   The flag field entry form title.
    */
-  public function flagTitle($flag_id, $entity_id) {
-    $flag = \Drupal::service('flag')->getFlagById($flag_id);
+  public function flagTitle(FlagInterface $flag, $entity_id) {
     $link_type = $flag->getLinkTypePlugin();
     return $link_type->getFlagQuestion();
   }
@@ -99,16 +104,15 @@ class FieldEntryFormController extends ControllerBase {
   /**
    * Title callback when editing an existing flagging.
    *
-   * @param int $flag_id
-   *   The flag ID.
+   * @param \Drupal\flag\FlagInterface $flag
+   *   The flag entity.
    * @param int $entity_id
    *   The entity ID to unflag.
    *
    * @return string
    *   The flag field entry form title.
    */
-  public function editTitle($flag_id, $entity_id) {
-    $flag = \Drupal::service('flag')->getFlagById($flag_id);
+  public function editTitle(FlagInterface $flag, $entity_id) {
     $link_type = $flag->getLinkTypePlugin();
     return $link_type->getEditFlaggingTitle();
   }

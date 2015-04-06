@@ -9,6 +9,7 @@ namespace Drupal\flag\Form;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Url;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\flag\FlagInterface;
 
 /**
  * Provides the form page for the Confirm Form link type.
@@ -35,10 +36,10 @@ class FlaggingConfirmForm extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state,
-                            $flag_id = NULL, $entity_id = NULL) {
+                            FlagInterface $flag = NULL, $entity_id = NULL) {
 
+    $this->flag = $flag;
     $flag_service = \Drupal::service('flag');
-    $this->flag = $flag_service->getFlagByID($flag_id);
     $this->entity = $flag_service->getFlaggableById($this->flag, $entity_id);
     return parent::buildForm($form, $form_state);
   }

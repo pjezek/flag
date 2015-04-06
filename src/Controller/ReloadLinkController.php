@@ -10,6 +10,7 @@ namespace Drupal\flag\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\flag\FlagInterface;
 use Drupal\flag\FlagService;
 
 /**
@@ -52,8 +53,8 @@ class ReloadLinkController extends ControllerBase implements ContainerInjectionI
   /**
    * Performs a flagging when called via a route.
    *
-   * @param int $flag_id
-   *   The flag ID.
+   * @param \Drupal\flag\FlagInterface $flag
+   *   The flag entity.
    * @param int $entity_id
    *   The flaggable ID.
    *
@@ -62,7 +63,9 @@ class ReloadLinkController extends ControllerBase implements ContainerInjectionI
    *
    * @see \Drupal\flag\Plugin\Reload
    */
-  public function flag($flag_id, $entity_id) {
+  public function flag(FlagInterface $flag, $entity_id) {
+    $flag_id = $flag->id();
+
     /* @var \Drupal\flag\FlaggingInterface $flagging */
     $flagging = $this->flagService->flag($flag_id, $entity_id);
 
@@ -75,8 +78,8 @@ class ReloadLinkController extends ControllerBase implements ContainerInjectionI
   /**
    * Performs a flagging when called via a route.
    *
-   * @param int $flag_id
-   *   The flag ID.
+   * @param \Drupal\flag\FlagInterface $flag
+   *   The flag entity.
    * @param int $entity_id
    *   The flagging ID.
    *
@@ -85,7 +88,9 @@ class ReloadLinkController extends ControllerBase implements ContainerInjectionI
    *
    * @see \Drupal\flag\Plugin\Reload
    */
-  public function unflag($flag_id, $entity_id) {
+  public function unflag(FlagInterface $flag, $entity_id) {
+    $flag_id = $flag->id();
+
     $this->flagService->unflag($flag_id, $entity_id);
 
     $flag = $this->flagService->getFlagById($flag_id);

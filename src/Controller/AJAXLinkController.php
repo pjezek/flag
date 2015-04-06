@@ -23,8 +23,8 @@ class AJAXLinkController extends ControllerBase {
    * This method is invoked when a user clicks an AJAX flagging link provided
    * by the AJAXactionLink plugin.
    *
-   * @param int $flag_id
-   *   The flag ID.
+   * @param \Drupal\flag\FlagInterface $flag
+   *   The flag entity.
    * @param int $entity_id
    *   The flaggable ID.
    *
@@ -33,10 +33,11 @@ class AJAXLinkController extends ControllerBase {
    *
    * @see \Drupal\flag\Plugin\ActionLink\AJAXactionLink
    */
-  public function flag($flag_id, $entity_id) {
+  public function flag(FlagInterface $flag, $entity_id) {
+    $flag_id = $flag->id();
+
     $flagging = \Drupal::service('flag')->flag($flag_id, $entity_id);
 
-    $flag = $flagging->getFlag();
     $entity = $flagging->getFlaggable();
 
     return $this->generateResponse('unflag', $flag, $entity);
@@ -48,8 +49,8 @@ class AJAXLinkController extends ControllerBase {
    * This method is invoked when a user clicks an AJAX unflagging link provided
    * by the AJAXactionLink plugin.
    *
-   * @param int $flag_id
-   *   The flag ID.
+   * @param \Drupal\flag\FlagInterface $flag
+   *   The flag entity.
    * @param int $entity_id
    *   The entity ID to unflag.
    *
@@ -58,11 +59,12 @@ class AJAXLinkController extends ControllerBase {
    *
    * @see \Drupal\flag\Plugin\ActionLink\AJAXactionLink
    */
-  public function unflag($flag_id, $entity_id) {
+  public function unflag(FlagInterface $flag, $entity_id) {
+    $flag_id = $flag->id();
+
     $flag_service = \Drupal::service('flag');
     $flag_service->unflag($flag_id, $entity_id);
 
-    $flag = $flag_service->getFlagById($flag_id);
     $entity = $flag_service->getFlaggableById($flag, $entity_id);
 
     return $this->generateResponse('flag', $flag, $entity);

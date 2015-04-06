@@ -49,7 +49,7 @@ class FlaggingForm extends ContentEntityForm {
       // link. Since that route doesn't use the flagging ID, Drupal can't build
       // the link for us.
       $route_params = [
-        'flag_id' => $this->entity->getFlagId(),
+        'flag' => $this->entity->getFlagId(),
         'entity_id' => $this->entity->getFlaggableId(),
         'destination' => \Drupal::request()->get('destination'),
       ];
