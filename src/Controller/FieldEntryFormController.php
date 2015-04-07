@@ -67,8 +67,8 @@ class FieldEntryFormController extends ControllerBase {
   /**
    * Performs an unflagging when called via a route.
    *
-   * @param int $flag_id
-   *   The flag ID.
+   * @param \Drupal\flag\FlagInterface $flag
+   *   The flag entity.
    * @param int $entity_id
    *   The entity ID to unflag.
    *
@@ -145,10 +145,11 @@ class FieldEntryFormController extends ControllerBase {
    * @param string|null $operation
    *   The operation identifying the form variant to return.
    *
-   * return array
+   * @return array
    *   The form array.
    */
   protected function getForm(FlaggingInterface $flagging, $operation = 'default') {
     return $this->entityFormBuilder()->getForm($flagging, $operation);
   }
+
 }
