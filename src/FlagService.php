@@ -341,8 +341,6 @@ class FlagService {
     $flag = $this->getFlagById($flag_id);
     $entity = $this->getFlaggableById($flag, $entity_id);
 
-    $this->decrementFlagCounts($flag, $entity);
-
     return $this->unflagByObject($flag, $entity, $account);
   }
 
@@ -368,6 +366,8 @@ class FlagService {
       $out[] = $flagging->id();
 
       $this->unflagByFlagging($flagging);
+
+      $this->decrementFlagCounts($flag, $entity);
     }
 
     return $out;

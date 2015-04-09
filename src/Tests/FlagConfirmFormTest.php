@@ -140,6 +140,14 @@ class FlagConfirmFormTest extends WebTestBase {
     $user_1 = $this->drupalCreateUser();
     $this->drupalLogin($user_1);
 
+    // Get the flag count before the flagging, querying the database directly.
+    $flag_count_pre = db_query('SELECT count FROM {flag_counts}
+      WHERE fid = :flag_id AND entity_type = :entity_type AND entity_id = :entity_id', [
+        ':flag_id' => $this->id,
+        ':entity_type' => 'node',
+        ':entity_id' => $node_id,
+      ])->fetchField();
+
     // Click the flag link.
     $this->drupalGet('node/' . $node_id);
     $this->clickLink(t('Flag this item'));
@@ -154,6 +162,38 @@ class FlagConfirmFormTest extends WebTestBase {
     // Check that the node is flagged.
     $this->drupalGet('node/' . $node_id);
     $this->assertLink(t('Unflag this item'));
+
+    // Check the flag count was incremented.
+    $flag_count_flagged = db_query('SELECT count FROM {flag_counts}
+      WHERE fid = :flag_id AND entity_type = :entity_type AND entity_id = :entity_id', [
+        ':flag_id' => $this->id,
+        ':entity_type' => 'node',
+        ':entity_id' => $node_id,
+      ])->fetchField();
+    $this->assertEqual($flag_count_flagged, $flag_count_pre + 1, "The flag count was incremented.");
+
+    // Unflag the node.
+    $this->clickLink(t('Unflag this item'));
+
+    // Check if we have the confirm form message displayed.
+    $this->assertText($this->unflagConfirmMessage);
+
+    // Submit the confirm form.
+    $this->drupalPostForm(NULL, [], t('Unflag'));
+    $this->assertResponse(200);
+
+    // Check that the node is no longer flagged.
+    $this->drupalGet('node/' . $node_id);
+    $this->assertLink(t('Flag this item'));
+
+    // Check the flag count was decremented.
+    $flag_count_unflagged = db_query('SELECT count FROM {flag_counts}
+      WHERE fid = :flag_id AND entity_type = :entity_type AND entity_id = :entity_id', [
+        ':flag_id' => $this->id,
+        ':entity_type' => 'node',
+        ':entity_id' => $node_id,
+      ])->fetchField();
+    $this->assertEqual($flag_count_unflagged, $flag_count_flagged - 1, "The flag count was decremented.");
   }
 
 }
