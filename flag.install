@@ -19,12 +19,12 @@ function flag_schema() {
         'length' => '32',
       ],
       'entity_type' => [
-        'description' => 'The flag type, usually one of "node", "comment", "user".',
+        'description' => 'The flag type, for example "node", "comment", or "user".',
         'type' => 'varchar',
         'length' => '128',
       ],
       'entity_id' => [
-        'description' => 'The unique ID of the content, usually either the {cid}, {uid}, or {nid}.',
+        'description' => 'The unique ID of the flagged entity, for example the uid, cid, or nid.',
         'type' => 'int',
         'unsigned' => TRUE,
         'disp-width' => '10',
