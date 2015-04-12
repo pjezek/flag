@@ -150,6 +150,24 @@ class FlagService {
   }
 
   /**
+   * Get a flagging that already exists.
+   *
+   * @param FlagInterface $flag
+   *   The flag.
+   * @param mixed $entity_id
+   *   The flaggable ID.
+   *
+   * @return FlaggingInterface|null
+   *   The flagging or NULL if the flagging is not found.
+   */
+  public function getFlagging(FlagInterface $flag, $entity_id) {
+    $entity = $this->getFlaggableById($flag, $entity_id);
+    $flaggings = $this->getFlaggings($entity, $flag, $this->currentUser);
+
+    return !empty($flaggings) ? reset($flaggings) : NULL;
+  }
+
+  /**
    * Get all flaggings for the given entity, flag, and optionally, user.
    *
    * @param EntityInterface $entity

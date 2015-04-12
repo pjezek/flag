@@ -57,10 +57,7 @@ class FieldEntryFormController extends ControllerBase {
    *   The flagging edit form.
    */
   public function edit(FlagInterface $flag, $entity_id) {
-    $flag_id = $flag->id();
-
-    $flagging = $this->getFlagging($flag_id, $entity_id);
-
+    $flagging = \Drupal::service('flag')->getFlagging($flag, $entity_id);
     return $this->getForm($flagging, 'edit');
   }
 
@@ -78,10 +75,7 @@ class FieldEntryFormController extends ControllerBase {
    * @see \Drupal\flag\Plugin\ActionLink\AJAXactionLink
    */
   public function unflag(FlagInterface $flag, $entity_id) {
-    $flag_id = $flag->id();
-
-    $flagging = $this->getFlagging($flag_id, $entity_id);
-
+    $flagging = \Drupal::service('flag')->getFlagging($flag, $entity_id);
     return $this->getForm($flagging, 'delete');
   }
 
@@ -115,26 +109,6 @@ class FieldEntryFormController extends ControllerBase {
   public function editTitle(FlagInterface $flag, $entity_id) {
     $link_type = $flag->getLinkTypePlugin();
     return $link_type->getEditFlaggingTitle();
-  }
-
-  /**
-   * Get a flagging that already exists.
-   *
-   * @param string $flag_id
-   *   The flag ID.
-   * @param mixed $entity_id
-   *   The flaggable ID.
-   *
-   * @return FlaggingInterface|null
-   *   The flagging or NULL.
-   */
-  protected function getFlagging($flag_id, $entity_id) {
-    $account = $this->currentUser();
-    $flag = \Drupal::service('flag')->getFlagById($flag_id);
-    $entity = \Drupal::service('flag')->getFlaggableById($flag, $entity_id);
-    $flaggings = \Drupal::service('flag')->getFlaggings($entity, $flag, $account);
-
-    return !empty($flaggings) ? reset($flaggings) : NULL;
   }
 
   /**
