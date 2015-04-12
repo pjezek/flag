@@ -438,21 +438,23 @@ function flag_flag_access_multiple($flag, $entity_ids, $account) {
 function flag_get_entity_flag_counts($flag, $entity_type) {
   $counts = &drupal_static(__FUNCTION__);
 
+  $flag_id = $flag->id();
+
   // We check to see if the flag count is already in the cache,
   // if it's not, run the query.
-  if (!isset($counts[$flag->name][$entity_type])) {
-    $counts[$flag->name][$entity_type] = [];
+  if (!isset($counts[$flag_id][$entity_type])) {
+    $counts[$flag_id][$entity_type] = [];
     $result = db_select('flagging', 'f')
       ->fields('f', ['fid'])
-      ->condition('fid', $flag->fid)
+      ->condition('fid', $flag_id)
       ->condition('entity_type', $entity_type)
       ->countQuery()
       ->execute()
       ->fetchField();
-    $counts[$flag->name][$entity_type] =  $result;
+    $counts[$flag_id][$entity_type] =  $result;
   }
 
-  return $counts[$flag->name][$entity_type];
+  return $counts[$flag_id][$entity_type];
 }
 
 /**
@@ -472,21 +474,24 @@ function flag_get_entity_flag_counts($flag, $entity_type) {
 function flag_get_user_flag_counts($flag, $user) {
   $counts = &drupal_static(__FUNCTION__);
 
+  $flag_id = $flag->id();
+  $uid = $user->id();
+
   // We check to see if the flag count is already in the cache,
   // if it's not, run the query.
-  if (!isset($counts[$flag->name][$user->uid])) {
-    $counts[$flag->name][$user->uid] = [];
+  if (!isset($counts[$flag_id][$uid])) {
+    $counts[$flag_id][$uid] = [];
     $result = db_select('flagging', 'f')
       ->fields('f', ['fid'])
-      ->condition('fid', $flag->fid)
-      ->condition('uid', $user->uid)
+      ->condition('fid', $flag_id)
+      ->condition('uid', $uid)
       ->countQuery()
       ->execute()
       ->fetchField();
-    $counts[$flag->name][$user->uid] = $result;
+    $counts[$flag_id][$uid] = $result;
   }
 
-  return $counts[$flag->name][$user->uid];
+  return $counts[$flag_id][$uid];
 }
 
 /**
@@ -508,16 +513,14 @@ function flag_get_counts($entity_type, $entity_id) {
 
   if (!isset($counts[$entity_type][$entity_id])) {
     $counts[$entity_type][$entity_id] = [];
-    $query = db_select('flag', 'f');
-    $query->leftJoin('flag_counts', 'fc', 'f.fid = fc.fid');
+    $query = db_select('flag_counts', 'fc');
     $result = $query
-      ->fields('f', ['name'])
-      ->fields('fc', ['count'])
+      ->fields('fc', ['fid', 'count'])
       ->condition('fc.entity_type', $entity_type)
       ->condition('fc.entity_id', $entity_id)
       ->execute();
     foreach ($result as $row) {
-      $counts[$entity_type][$entity_id][$row->name] = $row->count;
+      $counts[$entity_type][$entity_id][$row->fid] = $row->count;
     }
   }
 
@@ -542,10 +545,12 @@ function flag_get_flag_counts($flag_name, $reset = FALSE) {
     $counts = array();
   }
   if (!isset($counts[$flag_name])) {
-    $flag = flag_get_flag($flag_name);
+    $flag_service = \Drupal::service('flag');
+    $flag = $flag_service->getFlagById($flag_name);
+
     $counts[$flag_name] = db_select('flag_counts', 'fc')
-      ->fields('fc', array('flagging_id'))
-      ->condition('fid', $flag->fid)
+      ->fields('fc', array('fid'))
+      ->condition('fid', $flag_name)
       ->countQuery()
       ->execute()
       ->fetchField();
