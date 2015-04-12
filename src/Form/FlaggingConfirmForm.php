@@ -113,10 +113,10 @@ class FlaggingConfirmForm extends ConfirmFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     if ($this->isFlagged()) {
-      \Drupal::service('flag')->unflagByObject($this->flag, $this->entity);
+      \Drupal::service('flag')->unflag($this->flag, $this->entity);
     }
     else {
-      \Drupal::service('flag')->flagByObject($this->flag, $this->entity);
+      \Drupal::service('flag')->flag($this->flag, $this->entity);
     }
   }
 

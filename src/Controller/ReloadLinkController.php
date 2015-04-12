@@ -64,10 +64,11 @@ class ReloadLinkController extends ControllerBase implements ContainerInjectionI
    * @see \Drupal\flag\Plugin\Reload
    */
   public function flag(FlagInterface $flag, $entity_id) {
-    $flag_id = $flag->id();
+    /* @var \Drupal\Core\Entity\EntityInterface $entity */
+    $entity = $this->flagService->getFlaggableById($flag, $entity_id);
 
     /* @var \Drupal\flag\FlaggingInterface $flagging */
-    $flagging = $this->flagService->flag($flag_id, $entity_id);
+    $flagging = $this->flagService->flag($flag, $entity);
 
     // Redirect back to the entity. A passed in destination query parameter
     // will automatically override this.
@@ -89,12 +90,9 @@ class ReloadLinkController extends ControllerBase implements ContainerInjectionI
    * @see \Drupal\flag\Plugin\Reload
    */
   public function unflag(FlagInterface $flag, $entity_id) {
-    $flag_id = $flag->id();
-
-    $this->flagService->unflag($flag_id, $entity_id);
-
-    $flag = $this->flagService->getFlagById($flag_id);
+    /* @var \Drupal\Core\Entity\EntityInterface $entity */
     $entity = $this->flagService->getFlaggableById($flag, $entity_id);
+    $this->flagService->unflag($flag, $entity);
 
     // Redirect back to the entity. A passed in destination query parameter
     // will automatically override this.

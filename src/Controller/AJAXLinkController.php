@@ -34,11 +34,9 @@ class AJAXLinkController extends ControllerBase {
    * @see \Drupal\flag\Plugin\ActionLink\AJAXactionLink
    */
   public function flag(FlagInterface $flag, $entity_id) {
-    $flag_id = $flag->id();
-
-    $flagging = \Drupal::service('flag')->flag($flag_id, $entity_id);
-
-    $entity = $flagging->getFlaggable();
+    $flag_service = \Drupal::service('flag');
+    $entity = $flag_service->getFlaggableById($flag, $entity_id);
+    $flag_service->flag($flag, $entity);
 
     return $this->generateResponse('unflag', $flag, $entity);
   }
@@ -60,12 +58,9 @@ class AJAXLinkController extends ControllerBase {
    * @see \Drupal\flag\Plugin\ActionLink\AJAXactionLink
    */
   public function unflag(FlagInterface $flag, $entity_id) {
-    $flag_id = $flag->id();
-
     $flag_service = \Drupal::service('flag');
-    $flag_service->unflag($flag_id, $entity_id);
-
     $entity = $flag_service->getFlaggableById($flag, $entity_id);
+    $flag_service->unflag($flag_id, $entity_id);
 
     return $this->generateResponse('flag', $flag, $entity);
   }

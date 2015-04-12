@@ -281,7 +281,7 @@ class FlagService {
    * @return FlaggingInterface|null
    *   The flagging.
    */
-  public function flagByObject(FlagInterface $flag, EntityInterface $entity, AccountInterface $account = NULL) {
+  public function flag(FlagInterface $flag, EntityInterface $entity, AccountInterface $account = NULL) {
     if (empty($account)) {
       $account = $this->currentUser;
     }
@@ -310,59 +310,6 @@ class FlagService {
   }
 
   /**
-   * Flags an entity given the flag ID and entity ID.
-   *
-   * @param int $flag_id
-   *   The ID of the flag.
-   * @param int $entity_id
-   *   The ID of the entity to flag.
-   * @param AccountInterface $account
-   *   (optional) The account of user flagging the entity. If not given, the
-   *   current user is used.
-   *
-   * @return FlaggingInterface|null
-   *   The flagging entity.
-   *
-   * @api
-   */
-  public function flag($flag_id, $entity_id, AccountInterface $account = NULL) {
-    if (empty($account)) {
-      $account = $this->currentUser;
-    }
-
-    $flag = $this->getFlagById($flag_id);
-    $entity = $this->getFlaggableById($flag, $entity_id);
-
-    return $this->flagByObject($flag, $entity, $account);
-  }
-
-  /**
-   * Unflags an entity given the flag ID and entity ID.
-   *
-   * @param int $flag_id
-   *   The ID of the flag.
-   * @param int $entity_id
-   *   The ID of the flagged entity to unflag.
-   * @param AccountInterface $account
-   *   (optional) The account of the user that created the flagging.
-   *
-   * @return array
-   *   An array of flagging IDs to delete.
-   *
-   * @api
-   */
-  public function unflag($flag_id, $entity_id, AccountInterface $account = NULL) {
-    if (empty($account)) {
-      $account = $this->currentUser;
-    }
-
-    $flag = $this->getFlagById($flag_id);
-    $entity = $this->getFlaggableById($flag, $entity_id);
-
-    return $this->unflagByObject($flag, $entity, $account);
-  }
-
-  /**
    * Unflags the given entity for the given flag.
    *
    * @param FlagInterface $flag
@@ -375,7 +322,7 @@ class FlagService {
    * @return array
    *   An array of flagging IDs to delete.
    */
-  public function unflagByObject(FlagInterface $flag, EntityInterface $entity, AccountInterface $account = NULL) {
+  public function unflag(FlagInterface $flag, EntityInterface $entity, AccountInterface $account = NULL) {
     $this->eventDispatcher->dispatch(FlagEvents::ENTITY_UNFLAGGED, new FlaggingEvent($flag, $entity, 'unflag'));
 
     $out = [];
