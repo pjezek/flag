@@ -114,7 +114,7 @@ class FlagCountsTest extends WebTestBase {
    */
   public function testFlagCounts() {
     // Flag the node.
-    $this->flagService->flag($this->id, $this->node->id(), $this->adminUser);
+    $this->flagService->flag($this->flag, $this->node, $this->adminUser);
 
     // Check each of the count API functions.
     $flag_get_entity_flag_counts = flag_get_entity_flag_counts($this->flag, 'node');
