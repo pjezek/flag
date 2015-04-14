@@ -10,41 +10,42 @@ flag.flag.*:
       label: 'UUID'
     label:
       type: label
-      label: 'Label'
+      label: 'Name'
     types:
       type: sequence
+      label: 'The entity subtypes this flag applies to'
       sequence:
         - type: string
     entity_type:
       type: string
-      label: 'Flaggable Entity Type'
+      label: 'Flaggable entity type'
     enabled:
       type: boolean
-      label: 'Is flag enabled'
+      label: 'Whether the flag is enabled'
     global:
       type: boolean
-      label: 'Is flag global'
+      label: 'Whether the flag is global'
     flag_short:
       type: string
-      label: 'Flag Link Text'
+      label: 'Flag link text'
     flag_long:
       type: string
-      label: 'Flag Description'
+      label: 'Flag link description text'
     flag_message:
       type: string
-      label: 'Flag Message'
+      label: 'Flag message'
     unflag_short:
       type: string
-      label: 'Unflag Link Text'
+      label: 'Unflag link text'
     unflag_long:
       type: string
-      label: 'Unflag Description'
+      label: 'Unflag link description text'
     unflag_message:
       type: string
-      label: 'Unflag Message'
+      label: 'Unflag message'
     unflag_denied_text:
       type: string
-      label: 'Unflag Denied Text'
+      label: 'Unflag denied text'
     weight:
       type: integer
       label: 'Weight'
