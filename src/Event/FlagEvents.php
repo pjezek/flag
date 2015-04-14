@@ -13,16 +13,29 @@ final class FlagEvents {
 
   /**
    * Event ID for when an entity is flagged.
+   *
+   * @Event
+   *
+   * @var string
    */
   const ENTITY_FLAGGED = 'flag.entity_flagged';
 
   /**
    * Event ID for when a previously flagged entity is unflagged.
+   *
+   * @Event
+   *
+   * @var string
    */
   const ENTITY_UNFLAGGED = 'flag.entity_unflagged';
 
   /**
    * Event ID for when a flag (not a flagging) is deleted.
+   *
+   * @Event
+   *
+   * @var string
    */
   const FLAG_DELETED = 'flag.flag_deleted';
+
 }
