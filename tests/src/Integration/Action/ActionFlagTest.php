@@ -58,16 +58,38 @@ class ActionFlagTest extends UnitTestCase {
       }));
   }
   /**
+   * Fakes the enabling of a module and adds its namespace for plugin loading.
+   *
+   * Default behaviour works fine for core modules.
+   *
+   * @param string $name
+   *   The name of the module that's gonna be enabled.
+   * @param array $namespaces
+   *   Map of the association between module's namespaces and filesystem paths.
+   */
+  protected function enableModule($name, array $namespaces = []) {
+    $this->enabledModules[$name] = TRUE;
+
+    if (empty($namespaces)) {
+      $namespaces = ['Drupal\\' . $name => $this->root . '/core/modules/' . $name . '/src'];
+    }
+    foreach ($namespaces as $namespace => $path) {
+      $this->namespaces[$namespace] = $path;
+    }
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function setUp() {
     parent::setUp();
 
     $this->setEnableModules();
+    $this->enableModule('node');
 
     $namespaces = new \ArrayObject([
       'Drupal\\flag' => $this->root . '/modules/flag/src',
-      'Drupal\\rules' => $this->root . '/modules/flag/rules',
+      'Drupal\\rules' => $this->root . '/modules/rules/src',
       'Drupal\\Core\\TypedData' => $this->root . '/core/lib/Drupal/Core/TypedData',
       'Drupal\\Core\\Validation' => $this->root . '/core/lib/Drupal/Core/Validation',
     ]);
@@ -91,8 +113,15 @@ class ActionFlagTest extends UnitTestCase {
       $classResolver
     );
 
+    $entityManager = $this->getMockBuilder('Drupal\Core\Entity\EntityManagerInterface')
+      ->disableOriginalConstructor()
+      ->getMock();
+
+
     $container = new ContainerBuilder();
     $container->set('flag', $this->getFlagServiceMock([]));
+    $container->set('entity.manager', $entityManager);
+    $container->set('plugin.manager.action', $this->actionManager);
     $container->set('typed_data_manager', $this->typedDataManager);
     \Drupal::setContainer($container);
     $this->container = $container;
@@ -100,7 +129,6 @@ class ActionFlagTest extends UnitTestCase {
   }
 
   public function testActionFlag() {
-    //$flagService = $this->getFlagServiceMock([]);
     $action = $this->actionManager->createInstance('rules_flag_flag');
 
     $node = $this->getMock('Drupal\node\NodeInterface');
