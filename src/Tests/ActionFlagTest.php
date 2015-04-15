@@ -22,7 +22,7 @@ class ActionFlagTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['flag', 'rules', 'entity'];
+  public static $modules = ['flag', 'rules', 'entity', 'user', 'node', 'system'];
 
   /**
    * The expression plugin manager.
@@ -36,10 +36,12 @@ class ActionFlagTest extends KernelTestBase {
    */
   public function setUp() {
     parent::setUp();
-    $logger = RulesLog::logger();
-    $logger->clear();
 
-    $this->installEntitySchema('flag');
+    $this->installEntitySchema('flagging');
+
+    $this->installSchema('system', ['sequences']);
+    $this->installEntitySchema('user');
+    $this->installEntitySchema('node');
 
     $this->expressionManager = $this->container->get('plugin.manager.rules_expression');
   }
@@ -48,19 +50,20 @@ class ActionFlagTest extends KernelTestBase {
    * Tests passing a string context to a condition.
    */
   public function testActionFlag() {
-    $rule = $this->expressionManager->createRule([
-      'action_flag' => [
-        'node' => [
-          'type' => 'entity:node',
-          'label' => 'Node',
-        ],
-      ],
-    ]);
+    $entity_manager = $this->container->get('entity.manager');
+    $entity_manager->getStorage('node_type')
+      ->create(['type' => 'page'])
+      ->save();
 
-    $rule->addAction('rules_flag_flag');
-    $rule->execute();
+    $node = $entity_manager->getStorage('node')
+      ->create([
+        'title' => 'test',
+        'type' => 'page',
+      ]);
 
-    
+    $action = $this->expressionManager->createAction('rules_flag_flag');
+    $action->setContextValue('node', $node);
+    $action->execute();
   }
 
 }

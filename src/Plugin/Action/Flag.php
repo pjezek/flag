@@ -7,8 +7,14 @@
 namespace Drupal\flag\Plugin\Action;
 
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\flag\FlagService;
+use Drupal\node\Entity\Node;
 use Drupal\rules\Core\RulesActionBase;
+use Drupal\user\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\flag\FlagInterface;
+use Drupal\Core\Entity\Entity;
+use Drupal\flag\Entity\Flag as FlagEntity;
 
 /**
  * Provides a generic 'flag' action.
@@ -16,13 +22,36 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @Action(
  *   id = "rules_flag_flag",
  *   label = @Translation("Flag an enity"),
- *   category = @Translation("Flag")
+ *   category = @Translation("Flag"),
+ *   context = {
+ *     "node" = @ContextDefinition("entity:node",
+ *       label = @Translation("Existing enity to flag"),
+ *       description = @Translation("Existing Entity to flag.")
+ *     )
+ *   }
  * )
  *
  */
 class Flag extends RulesActionBase implements ContainerFactoryPluginInterface {
 
-  public function __construct(array $configuration, $plugin_id, $plugin_definition) {
+  /**
+   * @var FlagService $flagService
+   */
+  protected $flagService;
+
+  /**
+   * @var Entity $target
+   */
+  protected $target;
+
+  /**
+   * @param array       $configuration
+   * @param string      $plugin_id
+   * @param mixed       $plugin_definition
+   * @param FlagService $flagService
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, FlagService $flagService) {
+    $this->flagService = $flagService;
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
@@ -47,11 +76,13 @@ class Flag extends RulesActionBase implements ContainerFactoryPluginInterface {
     $plugin_id,
     $plugin_definition
   ) {
+    /** @var FlagService $flagService */
+    $flagService = $container->get('flag');
     return new static(
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('logger.factory')
+      $flagService
     );
   }
 
@@ -59,7 +90,14 @@ class Flag extends RulesActionBase implements ContainerFactoryPluginInterface {
    * {@inheritdoc}
    */
   public function execute() {
-    var_dump('executed');
+    // user, comment, node, entity
+
+    /** @var Entity $target */
+    $target = $this->getContextValue('node');
+
+    $values = array();
+    $entity = new FlagEntity($values, $target->getEntityType());
+    $this->flagService->flag($entity, $target);
   }
 
 }
