@@ -232,7 +232,7 @@ class FlagService {
    *   The flaggable entity object.
    */
   public function getFlaggableById(FlagInterface $flag, $entity_id) {
-    return $this->entityManager->getStorage($flag->getFlaggableEntityType())->load($entity_id);
+    return $this->entityManager->getStorage($flag->getFlaggableEntityTypeId())->load($entity_id);
   }
 
   /**

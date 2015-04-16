@@ -274,7 +274,7 @@ class Flag extends ConfigEntityBundleBase implements FlagInterface {
   /**
    * {@inheritdoc}
    */
-  public function getFlaggableEntityType() {
+  public function getFlaggableEntityTypeId() {
     return $this->entity_type;
   }
 
@@ -509,7 +509,7 @@ class Flag extends ConfigEntityBundleBase implements FlagInterface {
     // Reset the render cache for the entity.
     // @todo Inject the entity manager into the object?
     \Drupal::entityManager()
-      ->getViewBuilder($this->getFlaggableEntityType())
+      ->getViewBuilder($this->getFlaggableEntityTypeId())
       ->resetCache();
     // Clear entity extra field caches.
     \Drupal::entityManager()->clearCachedFieldDefinitions();

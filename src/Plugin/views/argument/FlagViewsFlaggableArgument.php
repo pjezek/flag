@@ -59,7 +59,7 @@ class FlagViewsFlaggableArgument extends NumericArgument {
     $titles = [];
 
     $flag = $this->getFlag();
-    $entity_type = $flag->getFlaggableEntityType();
+    $entity_type = $flag->getFlaggableEntityTypeId();
 
     $def = \Drupal::entityManager()->getDefinition($entity_type);
     $entity_keys = $def->getKeys();
