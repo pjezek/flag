@@ -7,9 +7,13 @@
 
 namespace Drupal\Tests\flag\Integration\Action;
 
-use Drupal\Tests\rules\Integration\RulesIntegrationTestBase;
+use Drupal\Tests\rules\Integration\RulesEntityIntegrationTestBase;
 
-class ActionFlagTest extends RulesIntegrationTestBase {
+/**
+ * @coversDefaultClass \Drupal\flag\Plugin\Action\Flag
+ * @group flag_action
+ */
+class ActionFlagTest extends RulesEntityIntegrationTestBase {
 
   /**
    * {@inheritdoc}
@@ -17,29 +21,57 @@ class ActionFlagTest extends RulesIntegrationTestBase {
   public function setUp() {
     parent::setUp();
     $this->enableModule('flag', ['Drupal\\flag' => $this->root . '/modules/flag/src']);
-    $this->enableModule('node');
 
-    $this->container->set('flag', $this->getFlagServiceMock([]));
+    $flagtypeMock = $this->getMockBuilder('Drupal\flag\FlagTypePluginManager')
+      ->disableOriginalConstructor()
+      ->getMock();
+    $this->container->set('plugin.manager.flag.flagtype', $flagtypeMock);
+
+    $linktypeMock = $this->getMockBuilder('Drupal\flag\ActionLinkPluginManager')
+      ->disableOriginalConstructor()
+      ->getMock();
+    $this->container->set('plugin.manager.flag.linktype', $linktypeMock);
+  }
+
+  /**
+   * Tests the summary.
+   *
+   * @covers ::summary
+   */
+  public function testSummary() {
+    $flagServiceMock = $this->getFlagServiceMock([]);
+    $this->container->set('flag', $flagServiceMock);
+
+    $action = $this->getFlagAction();
+
+    $this->assertEquals('Flag entity', $action->summary());
   }
 
   public function testActionFlag() {
-    $action = $this->actionManager->createInstance('rules_flag_flag');
+
+    $flagServiceMock = $this->getFlagServiceMock([]);
+    $flagServiceMock
+      ->expects($this->once())
+      ->method('flag')
+      ->will($this->returnValue([]));
+    $this->container->set('flag', $flagServiceMock);
+
+    $action = $this->getFlagAction();
     $node = $this->getMock('Drupal\node\NodeInterface');
-    $action->setContextValue('node', $node);
+    $action->setContextValue('entity', $node);
     $action->execute();
   }
 
-  protected function getFlagServiceMock($returnValue) {
+  protected function getFlagServiceMock() {
 
     $flagServiceMock = $this->getMockBuilder('Drupal\flag\FlagService')
       ->disableOriginalConstructor()
       ->getMock();
 
-    $flagServiceMock
-      ->expects($this->once())
-      ->method('flag')
-      ->will($this->returnValue($returnValue));
-
       return $flagServiceMock;
     }
+
+  protected function getFlagAction() {
+    return $this->actionManager->createInstance('flag_action_flag');
+  }
 }
