@@ -6,3 +6,5 @@ package: Flags
 configure: flag.list
 dependencies:
  - views_ui
+test_dependencies:
+ - rules
