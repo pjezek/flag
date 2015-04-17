@@ -47,6 +47,11 @@ class ActionFlagTest extends RulesEntityIntegrationTestBase {
     $this->assertEquals('Flag entity', $action->summary());
   }
 
+  /**
+   * Tests the execution of the flag action.
+   *
+   * @covers ::summary
+   */
   public function testActionFlag() {
 
     $flagServiceMock = $this->getFlagServiceMock([]);
@@ -56,22 +61,38 @@ class ActionFlagTest extends RulesEntityIntegrationTestBase {
       ->will($this->returnValue([]));
     $this->container->set('flag', $flagServiceMock);
 
-    $action = $this->getFlagAction();
+
     $node = $this->getMock('Drupal\node\NodeInterface');
+    $flag = $this->getFlagMock();
+    $action = $this->getFlagAction();
     $action->setContextValue('entity', $node);
+    $action->setContextValue('flag', $flag);
     $action->execute();
   }
 
+  /**
+   * Helper function to create a Mock of 'Drupal\flag\FlagService'.
+   *
+   * @return \PHPUnit_Framework_MockObject_MockObject
+   */
   protected function getFlagServiceMock() {
-
-    $flagServiceMock = $this->getMockBuilder('Drupal\flag\FlagService')
+    return $this->getMockBuilder('Drupal\flag\FlagService')
       ->disableOriginalConstructor()
       ->getMock();
-
-      return $flagServiceMock;
     }
 
+  /**
+   * Helper function to create a 'flag_action_flag' action.
+   *
+   * @return object
+   */
   protected function getFlagAction() {
     return $this->actionManager->createInstance('flag_action_flag');
+  }
+
+  protected function getFlagMock() {
+    return $this->getMockBuilder('Drupal\flag\Entity\Flag')
+      ->disableOriginalConstructor()
+      ->getMock();
   }
 }

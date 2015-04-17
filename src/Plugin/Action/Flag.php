@@ -23,7 +23,11 @@ use Drupal\flag\Entity\Flag as FlagEntity;
  *   context = {
  *     "entity" = @ContextDefinition("entity",
  *       label = @Translation("Entity"),
- *       description = @Translation("Flags the specifies the entity.")
+ *       description = @Translation("The target entity to flag.")
+ *     ),
+ *     "flag" = @ContextDefinition("entity",
+ *       label = @Translation("Flag"),
+ *       description = @Translation("The Flag entity.")
  *     )
  *   }
  * )
@@ -90,10 +94,11 @@ class Flag extends RulesActionBase implements ContainerFactoryPluginInterface {
     // user, comment, node, entity
 
     /** @var Entity $target */
-    $entity = $this->getContextValue('entity');
+    $entity = $this->getContextValue('entity')
 
-    $values = array();
-    $flag = new FlagEntity($values, $entity->getEntityType());
+    /** @var FlagEntity */;
+    $flag = $this->getContextValue('flag');
+
     $this->flagService->flag($flag, $entity);
   }
 
