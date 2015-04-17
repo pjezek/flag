@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains \Drupal\Tests\flag\Integration\Action\ActionFlagTest.
+ * Contains \Drupal\Tests\flag\Integration\Action\ActionUnFlagTest.
  */
 
 namespace Drupal\Tests\flag\Integration\Action;
@@ -10,7 +10,7 @@ namespace Drupal\Tests\flag\Integration\Action;
  * @coversDefaultClass \Drupal\flag\Plugin\Action\Flag
  * @group flag_action
  */
-class ActionFlagTest extends Base {
+class ActionUnFlagTest extends Base {
 
   /**
    * Tests the summary.
@@ -21,9 +21,9 @@ class ActionFlagTest extends Base {
     $flagServiceMock = $this->getFlagServiceMock([]);
     $this->container->set('flag', $flagServiceMock);
 
-    $action = $this->actionManager->createInstance('flag_action_flag');
+    $action = $this->getUnFlagAction();
 
-    $this->assertEquals('Flag entity', $action->summary());
+    $this->assertEquals('UnFlag entity', $action->summary());
   }
 
   /**
@@ -36,14 +36,14 @@ class ActionFlagTest extends Base {
     $flagServiceMock = $this->getFlagServiceMock([]);
     $flagServiceMock
       ->expects($this->once())
-      ->method('flag')
+      ->method('unflag')
       ->will($this->returnValue([]));
     $this->container->set('flag', $flagServiceMock);
 
 
     $node = $this->getMock('Drupal\node\NodeInterface');
     $flag = $this->getFlagMock();
-    $action = $this->getFlagAction();
+    $action = $this->getUnFlagAction();
     $action->setContextValue('entity', $node);
     $action->setContextValue('flag', $flag);
     $action->execute();
@@ -54,8 +54,8 @@ class ActionFlagTest extends Base {
    *
    * @return object
    */
-  protected function getFlagAction() {
-    return $this->actionManager->createInstance('flag_action_flag');
+  protected function getUnFlagAction() {
+    return $this->actionManager->createInstance('flag_action_unflag');
   }
 
 }

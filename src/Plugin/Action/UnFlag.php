@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains the \Drupal\flag\Plugin\Action\Flag class.
+ * Contains the \Drupal\flag\Plugin\Action\UnFlag class.
  */
 
 namespace Drupal\flag\Plugin\Action;
@@ -10,16 +10,16 @@ use Drupal\Core\Entity\Entity;
 use Drupal\flag\Entity\Flag as FlagEntity;
 
 /**
- * Provides a generic 'flag' action.
+ * Provides a generic 'unflag' action.
  *
  * @Action(
- *   id = "flag_action_flag",
- *   label = @Translation("Flags the specifies the entity."),
+ *   id = "flag_action_unflag",
+ *   label = @Translation("Unflags the specifies the entity."),
  *   category = @Translation("Entity"),
  *   context = {
  *     "entity" = @ContextDefinition("entity",
  *       label = @Translation("Entity"),
- *       description = @Translation("The target entity to flag.")
+ *       description = @Translation("The target entity to unflag.")
  *     ),
  *     "flag" = @ContextDefinition("entity",
  *       label = @Translation("Flag"),
@@ -29,7 +29,7 @@ use Drupal\flag\Entity\Flag as FlagEntity;
  * )
  *
  */
-class Flag extends Base {
+class UnFlag extends Base {
 
   /**
    * {@inheritdoc}
@@ -41,14 +41,14 @@ class Flag extends Base {
     /** @var FlagEntity */;
     $flag = $this->getContextValue('flag');
 
-    $this->flagService->flag($flag, $entity);
+    $this->flagService->unflag($flag, $entity);
   }
 
   /**
    * {@inheritdoc}
    */
   public function summary() {
-    return $this->t('Flag entity');
+    return $this->t('UnFlag entity');
   }
 
 }
