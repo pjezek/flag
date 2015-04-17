@@ -90,11 +90,11 @@ class Flag extends RulesActionBase implements ContainerFactoryPluginInterface {
     // user, comment, node, entity
 
     /** @var Entity $target */
-    $target = $this->getContextValue('entity');
+    $entity = $this->getContextValue('entity');
 
     $values = array();
-    $entity = new FlagEntity($values, $target->getEntityType());
-    $this->flagService->flag($entity, $target);
+    $flag = new FlagEntity($values, $entity->getEntityType());
+    $this->flagService->flag($flag, $entity);
   }
 
   /**
