@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains the \Drupal\flag\Plugin\Action\Flag class.
+ * Contains \Drupal\flag\Plugin\Action\Flag class.
  */
 
 namespace Drupal\flag\Plugin\Action;

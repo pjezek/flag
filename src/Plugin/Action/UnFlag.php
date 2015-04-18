@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains the \Drupal\flag\Plugin\Action\UnFlag class.
+ * Contains \Drupal\flag\Plugin\Action\UnFlag.
  */
 
 namespace Drupal\flag\Plugin\Action;
