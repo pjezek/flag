@@ -7,8 +7,6 @@
 namespace Drupal\flag;
 
 use Drupal\Core\Session\AccountInterface;
-use Drupal\flag\Entity\Flag;
-use Drupal\flag\Entity\Flagging;
 use Drupal\flag\Event\FlagEvents;
 use Drupal\flag\Event\FlaggingEvent;
 use Drupal\flag\FlagInterface;
@@ -234,7 +232,7 @@ class FlagService {
    *   The flaggable entity object.
    */
   public function getFlaggableById(FlagInterface $flag, $entity_id) {
-    return $this->entityManager->getStorage($flag->getFlaggableEntityType())->load($entity_id);
+    return $this->entityManager->getStorage($flag->getFlaggableEntityTypeId())->load($entity_id);
   }
 
   /**

@@ -46,4 +46,24 @@ class FlaggingEvent extends FlagEventBase {
     $this->action = $action;
   }
 
+  /**
+   * Returns the flaggable entity associated with the Event.
+   *
+   * @return \Drupal\Core\Entity\EntityInterface
+   *   The entity.
+   */
+  public function getEntity() {
+    return $this->entity;
+  }
+
+  /**
+   * Returns the flag associated with the Event.
+   *
+   * @return \Drupal\flag\FlagInterface
+   *   The flag.
+   */
+  public function getFlag() {
+    return $this->flag;
+  }
+
 }

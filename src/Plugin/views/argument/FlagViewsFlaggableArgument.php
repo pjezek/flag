@@ -7,8 +7,8 @@
 namespace Drupal\flag\Plugin\views\argument;
 
 
-use Drupal\views\Plugin\views\argument\Numeric;
-use Drupal\Component\Utility\String;
+use Drupal\Component\Utility\SafeMarkup;
+use Drupal\views\Plugin\views\argument\NumericArgument;
 use Drupal\Core\Database\Connection;
 use Drupal\flag\FlagInterface;
 
@@ -17,7 +17,7 @@ use Drupal\flag\FlagInterface;
  *
  * @ViewsArgument("FlagViewsFlaggableArgument")
  */
-class FlagViewsFlaggableArgument extends Numeric {
+class FlagViewsFlaggableArgument extends NumericArgument {
 
   /**
    * Database Service Object.
@@ -59,7 +59,7 @@ class FlagViewsFlaggableArgument extends Numeric {
     $titles = [];
 
     $flag = $this->getFlag();
-    $entity_type = $flag->getFlaggableEntityType();
+    $entity_type = $flag->getFlaggableEntityTypeId();
 
     $def = \Drupal::entityManager()->getDefinition($entity_type);
     $entity_keys = $def->getKeys();
@@ -70,7 +70,7 @@ class FlagViewsFlaggableArgument extends Numeric {
       ->execute();
 
     foreach ($result as $title) {
-      $titles[] = String::checkPlain($title->$entity_keys['label']);
+      $titles[] = SafeMarkup::checkPlain($title->$entity_keys['label']);
     }
 
     return $titles;

@@ -53,7 +53,7 @@ interface FlagInterface extends ConfigEntityInterface, EntityWithPluginCollectio
    * @return string
    *   The flaggable entity ID.
    */
-  public function getFlaggableEntityType();
+  public function getFlaggableEntityTypeId();
 
   /**
    * Set the flag type plugin.

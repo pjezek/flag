@@ -6,10 +6,10 @@
 
 namespace Drupal\flag\Controller;
 
+use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\flag\FlagInterface;
-use Drupal\Component\Utility\String;
 use Drupal\Core\Url;
 
 /**
@@ -53,7 +53,7 @@ class FlagListBuilder extends ConfigEntityListBuilder {
     $out = implode(', ', $all_roles);
 
     if (empty($out)) {
-      return String::placeHolder($this->t('None'));
+      return SafeMarkup::placeHolder($this->t('None'));
     }
 
     return rtrim($out, ', ');
