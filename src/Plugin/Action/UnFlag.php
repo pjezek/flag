@@ -48,7 +48,7 @@ class UnFlag extends FlagActionBase {
    * {@inheritdoc}
    */
   public function summary() {
-    return $this->t('UnFlag entity');
+    return $this->t('unflag entity');
   }
 
 }

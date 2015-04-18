@@ -44,7 +44,7 @@ class FlagIntegrationTestBase extends RulesEntityIntegrationTestBase {
 
   /**
    * Helper function to create a mock of 'Drupal\flag\Entity\Flag'.
-   * 
+   *
    * @return \PHPUnit_Framework_MockObject_MockObject
    */
   protected function getFlagMock() {

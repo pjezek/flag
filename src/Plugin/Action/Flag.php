@@ -48,7 +48,7 @@ class Flag extends FlagActionBase {
    * {@inheritdoc}
    */
   public function summary() {
-    return $this->t('Flag entity');
+    return $this->t('flag entity');
   }
 
 }
