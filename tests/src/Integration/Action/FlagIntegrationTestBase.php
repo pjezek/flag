@@ -8,6 +8,9 @@ namespace Drupal\Tests\flag\Integration\Action;
 
 use Drupal\Tests\rules\Integration\RulesEntityIntegrationTestBase;
 
+/**
+ * Class FlagIntegrationTestBase holds common used methods for testing flag features.
+ */
 class FlagIntegrationTestBase extends RulesEntityIntegrationTestBase {
 
   /**

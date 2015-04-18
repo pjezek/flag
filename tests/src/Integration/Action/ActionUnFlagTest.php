@@ -7,6 +7,7 @@
 namespace Drupal\Tests\flag\Integration\Action;
 
 /**
+ * Tests Class for flag_action_unflag rules action plugin.
  * @coversDefaultClass \Drupal\flag\Plugin\Action\Flag
  * @group flag_action
  */

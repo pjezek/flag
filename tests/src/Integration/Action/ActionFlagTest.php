@@ -7,6 +7,7 @@
 namespace Drupal\Tests\flag\Integration\Action;
 
 /**
+ * Tests Class for flag_action_flag rules action plugin.
  * @coversDefaultClass \Drupal\flag\Plugin\Action\Flag
  * @group flag_action
  */
@@ -21,7 +22,7 @@ class ActionFlagTest extends FlagIntegrationTestBase {
     $flagServiceMock = $this->getFlagServiceMock([]);
     $this->container->set('flag', $flagServiceMock);
 
-    $action = $this->actionManager->createInstance('flag_action_flag');
+    $action = $this->getFlagAction();
 
     $this->assertEquals('Flag entity', $action->summary());
   }
@@ -40,9 +41,10 @@ class ActionFlagTest extends FlagIntegrationTestBase {
       ->will($this->returnValue([]));
     $this->container->set('flag', $flagServiceMock);
 
-
     $node = $this->getMock('Drupal\node\NodeInterface');
+
     $flag = $this->getFlagMock();
+
     $action = $this->getFlagAction();
     $action->setContextValue('entity', $node);
     $action->setContextValue('flag', $flag);
