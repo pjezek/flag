@@ -29,7 +29,7 @@ use Drupal\flag\Entity\Flag as FlagEntity;
  * )
  *
  */
-class UnFlag extends Base {
+class UnFlag extends FlagActionBase {
 
   /**
    * {@inheritdoc}

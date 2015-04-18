@@ -10,7 +10,7 @@ namespace Drupal\Tests\flag\Integration\Action;
  * @coversDefaultClass \Drupal\flag\Plugin\Action\Flag
  * @group flag_action
  */
-class ActionFlagTest extends Base {
+class ActionFlagTest extends FlagIntegrationTestBase {
 
   /**
    * Tests the summary.

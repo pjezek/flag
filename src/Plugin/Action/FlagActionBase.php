@@ -11,7 +11,7 @@ use Drupal\flag\FlagService;
 use Drupal\rules\Core\RulesActionBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class Base extends RulesActionBase implements ContainerFactoryPluginInterface {
+class FlagActionBase extends RulesActionBase implements ContainerFactoryPluginInterface {
 
   /**
    * @var FlagService $flagService

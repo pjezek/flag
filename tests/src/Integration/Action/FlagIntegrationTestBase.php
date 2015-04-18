@@ -8,7 +8,7 @@ namespace Drupal\Tests\flag\Integration\Action;
 
 use Drupal\Tests\rules\Integration\RulesEntityIntegrationTestBase;
 
-class Base extends RulesEntityIntegrationTestBase {
+class FlagIntegrationTestBase extends RulesEntityIntegrationTestBase {
 
   /**
    * {@inheritdoc}
