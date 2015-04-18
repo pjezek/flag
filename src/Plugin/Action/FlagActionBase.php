@@ -11,6 +11,9 @@ use Drupal\flag\FlagService;
 use Drupal\rules\Core\RulesActionBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Class FlagActionBase provides common methods for flag rules actions.
+ */
 class FlagActionBase extends RulesActionBase implements ContainerFactoryPluginInterface {
 
   /**
