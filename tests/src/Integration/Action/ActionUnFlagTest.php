@@ -24,7 +24,7 @@ class ActionUnFlagTest extends FlagIntegrationTestBase {
 
     $action = $this->getUnFlagAction();
 
-    $this->assertEquals('UnFlag entity', $action->summary());
+    $this->assertEquals('unflag entity', $action->summary());
   }
 
   /**

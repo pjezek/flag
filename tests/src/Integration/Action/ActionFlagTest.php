@@ -24,7 +24,7 @@ class ActionFlagTest extends FlagIntegrationTestBase {
 
     $action = $this->getFlagAction();
 
-    $this->assertEquals('Flag entity', $action->summary());
+    $this->assertEquals('flag entity', $action->summary());
   }
 
   /**
