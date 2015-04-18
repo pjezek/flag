@@ -22,10 +22,22 @@ class FlagActionBase extends RulesActionBase implements ContainerFactoryPluginIn
   protected $flagService;
 
   /**
-   * @param array       $configuration
-   * @param string      $plugin_id
-   * @param mixed       $plugin_definition
-   * @param FlagService $flagService
+   * Overrides \Drupal\Component\Plugin\ContextAwarePluginBase::__construct().
+   *
+   * Overrides the construction of context aware plugins to allow FlagService
+   * been injected with dependency injection.
+   *
+   * @param array $configuration
+   *   The plugin configuration, i.e. an array with configuration values keyed
+   *   by configuration option name. The special key 'context' may be used to
+   *   initialize the defined contexts by setting it to an array of context
+   *   values keyed by context names.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\flag\FlagService $flagService
+   *   FlagService for working with flags injected with dependency injection.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, FlagService $flagService) {
     $this->flagService = $flagService;
@@ -37,11 +49,11 @@ class FlagActionBase extends RulesActionBase implements ContainerFactoryPluginIn
    *
    * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
    *   The container to pull out services used in the plugin.
-   * @param array                                                     $configuration
+   * @param array $configuration
    *   A configuration array containing information about the plugin instance.
-   * @param string                                                    $plugin_id
+   * @param string $plugin_id
    *   The plugin ID for the plugin instance.
-   * @param mixed                                                     $plugin_definition
+   * @param mixed $plugin_definition
    *   The plugin implementation definition.
    *
    * @return static

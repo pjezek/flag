@@ -32,7 +32,7 @@ class FlagIntegrationTestBase extends RulesEntityIntegrationTestBase {
   }
 
   /**
-   * Helper function to create a Mock of 'Drupal\flag\FlagService'.
+   * Helper function to create a mock of 'Drupal\flag\FlagService'.
    *
    * @return \PHPUnit_Framework_MockObject_MockObject
    */
@@ -42,6 +42,11 @@ class FlagIntegrationTestBase extends RulesEntityIntegrationTestBase {
       ->getMock();
   }
 
+  /**
+   * Helper function to create a mock of 'Drupal\flag\Entity\Flag'.
+   * 
+   * @return \PHPUnit_Framework_MockObject_MockObject
+   */
   protected function getFlagMock() {
     return $this->getMockBuilder('Drupal\flag\Entity\Flag')
       ->disableOriginalConstructor()
